@@ -20,6 +20,7 @@ struct Pokemon: Codable {
 struct PokemonData: Codable {
     let id: Int
     let types: [PokemonTypeEntry]
+    let sprites: PokemonPicture
 }
 
 struct PokemonType: Codable {
@@ -32,3 +33,9 @@ struct PokemonTypeEntry: Codable {
     let slot: Int
     let type: PokemonType
 }
+
+struct PokemonPicture: Codable {
+    let front_default: String
+}
+
+
