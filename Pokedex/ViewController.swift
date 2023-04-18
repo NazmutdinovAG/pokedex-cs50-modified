@@ -40,8 +40,8 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath)
-        cell.textLabel?.text = pokemon[indexPath.row].name.capitalized
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonCell
+        cell.prepare(pokemon: pokemon[indexPath.row])
         return cell
     }
     

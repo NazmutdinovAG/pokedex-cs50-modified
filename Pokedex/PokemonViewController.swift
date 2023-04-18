@@ -15,7 +15,6 @@ class PokemonViewController: UIViewController {
     @IBOutlet weak var pokemonPicture: UIImageView!
     
     var pokemon: Pokemon!
-    var pokemonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,7 @@ class PokemonViewController: UIViewController {
                 let pokemonData = try JSONDecoder().decode(PokemonData.self, from: data)
                 DispatchQueue.main.async { [weak self] in
                     self?.nameLabel.text = self?.pokemon.name.capitalized
-                    self?.numberLabel.text = String(format: "#%03d", pokemonData.id)
+                    self?.numberLabel.text = String(format: "#%04d", pokemonData.id)
                     self?.pokemonPicture.loadImage(from: pokemonData.sprites.front_default)
                     
                     for typeEntry in pokemonData.types {
