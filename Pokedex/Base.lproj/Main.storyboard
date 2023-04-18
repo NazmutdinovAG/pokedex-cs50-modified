@@ -57,37 +57,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfz-f3-FvQ">
-                                <rect key="frame" x="0.0" y="391.66666666666669" width="375" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nfz-f3-FvQ">
+                                <rect key="frame" x="0.0" y="406" width="375" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#001" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGL-xc-cI8">
-                                <rect key="frame" x="0.0" y="425.66666666666669" width="375" height="25.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGL-xc-cI8">
+                                <rect key="frame" x="0.0" y="411" width="375" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKb-Dh-ryK">
-                                <rect key="frame" x="0.0" y="461" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="421" width="375" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wte-bv-ibS">
-                                <rect key="frame" x="0.0" y="466" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="426" width="375" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vkw-Hn-y1x">
-                                <rect key="frame" x="87.666666666666686" y="176.66666666666663" width="200" height="200"/>
+                                <rect key="frame" x="87.666666666666686" y="191" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="1hH-7g-Zru"/>
                                     <constraint firstAttribute="width" constant="200" id="rb0-3M-Rk0"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="FVs-hf-juK">
+                                <rect key="frame" x="177" y="280.33333333333331" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="d9x-bn-4Ez"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -100,8 +103,10 @@
                             <constraint firstItem="d9x-bn-4Ez" firstAttribute="trailing" secondItem="sKb-Dh-ryK" secondAttribute="trailing" id="HlM-mG-rMl"/>
                             <constraint firstItem="vkw-Hn-y1x" firstAttribute="centerX" secondItem="d9x-bn-4Ez" secondAttribute="centerX" id="I1Y-eV-nmC"/>
                             <constraint firstItem="sKb-Dh-ryK" firstAttribute="top" secondItem="vGL-xc-cI8" secondAttribute="bottom" constant="10" id="Ik4-YJ-0xF"/>
+                            <constraint firstItem="vkw-Hn-y1x" firstAttribute="top" secondItem="FVs-hf-juK" secondAttribute="bottom" constant="-109.33333333333337" id="SeD-hb-qh0"/>
                             <constraint firstItem="Wte-bv-ibS" firstAttribute="leading" secondItem="d9x-bn-4Ez" secondAttribute="leading" id="cxi-Zb-lx5"/>
                             <constraint firstItem="d9x-bn-4Ez" firstAttribute="trailing" secondItem="vGL-xc-cI8" secondAttribute="trailing" id="gwE-T3-2W9"/>
+                            <constraint firstItem="vkw-Hn-y1x" firstAttribute="leading" secondItem="FVs-hf-juK" secondAttribute="trailing" constant="-109.33333333333331" id="hkc-yz-HoR"/>
                             <constraint firstItem="Nfz-f3-FvQ" firstAttribute="top" secondItem="vkw-Hn-y1x" secondAttribute="bottom" constant="15" id="iUl-Vc-j1S"/>
                             <constraint firstItem="d9x-bn-4Ez" firstAttribute="trailing" secondItem="Wte-bv-ibS" secondAttribute="trailing" id="pui-6f-Uob"/>
                             <constraint firstItem="vGL-xc-cI8" firstAttribute="leading" secondItem="d9x-bn-4Ez" secondAttribute="leading" id="sS1-rb-UJ6"/>
@@ -110,6 +115,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="JMA-io-AZX"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="FVs-hf-juK" id="vL6-Ub-swr"/>
                         <outlet property="nameLabel" destination="Nfz-f3-FvQ" id="qnd-Ia-6dV"/>
                         <outlet property="numberLabel" destination="vGL-xc-cI8" id="U1M-kz-nXL"/>
                         <outlet property="pokemonPicture" destination="vkw-Hn-y1x" id="Dl5-7P-Azz"/>

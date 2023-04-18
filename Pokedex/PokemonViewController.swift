@@ -13,21 +13,25 @@ class PokemonViewController: UIViewController {
     @IBOutlet weak var type1Label: UILabel!
     @IBOutlet weak var type2Label: UILabel!
     @IBOutlet weak var pokemonPicture: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var pokemon: Pokemon!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
         
         guard let url = URL(string: pokemon.url) else { return }
-        URLSession.shared.dataTask(with: url) { data, respone, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, respone, error in
             guard let data = data else { return }
             do {
                 let pokemonData = try JSONDecoder().decode(PokemonData.self, from: data)
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     self?.nameLabel.text = self?.pokemon.name.capitalized
                     self?.numberLabel.text = String(format: "#%04d", pokemonData.id)
-                    self?.pokemonPicture.loadImage(from: pokemonData.sprites.front_default)
+                    self?.pokemonPicture.loadImage(from: pokemonData.sprites.front_default, completion: {
+                        self?.activityIndicator.stopAnimating()
+                    })
                     
                     for typeEntry in pokemonData.types {
                         if typeEntry.slot == 1 {
@@ -42,12 +46,11 @@ class PokemonViewController: UIViewController {
                 print("\(error)")
             }
         }.resume()
-        
     }
 }
 
 extension UIImageView {
-    func loadImage(from stringURL: String) {
+    func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) {
         guard let url = URL(string: stringURL) else { return }
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard data != nil else { return }
@@ -56,6 +59,7 @@ extension UIImageView {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self?.image = image
+                    completion()
                 }
             }
             catch let error {
