@@ -41,6 +41,7 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonCell
+        cell.prepareForReuse()
         cell.prepare(pokemon: pokemon[indexPath.row])
         return cell
     }

@@ -26,6 +26,10 @@ class PokemonCell: UITableViewCell {
             }.resume()
         }
     }
+    
+    override func prepareForReuse() {
+        self.imageView?.image = nil
+    }
 
 }
 
