@@ -8,28 +8,39 @@
 import UIKit
 
 class PokemonCell: UITableViewCell {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var pokemonImage: UIImageView!
+    var pokemonDataTask: URLSessionDataTask?
+    var pokemonImageTask: URLSessionTask?
     
     func prepare(pokemon: Pokemon) {
-        self.textLabel?.text = pokemon.name
-        if let url = URL(string: pokemon.url) {
-            URLSession.shared.dataTask(with: url) { data, respone, error in
+        nameLabel.text = pokemon.name
+        guard let url = URL(string: pokemon.url) else { return }
+        self.pokemonDataTask = URLSession.shared.dataTask(with: url) {[weak self] data, respone, error in
                 guard let data = data else { return }
                 do {
                     let pokemonData = try JSONDecoder().decode(PokemonData.self, from: data)
                     DispatchQueue.main.async { [weak self] in
-                        self?.imageView?.loadImage(from: pokemonData.sprites.front_default)
+                        self?.pokemonImageTask = self?.pokemonImage.loadImage(from: pokemonData.sprites.front_default, completion: {[weak self] in
+                            self?.activityIndicator.stopAnimating()
+                        })
+                        self?.pokemonImageTask?.resume()
                     }
                 }
                 catch let error {
                     print("\(error)")
                 }
-            }.resume()
         }
+        self.pokemonDataTask?.resume()
     }
     
     override func prepareForReuse() {
-        self.imageView?.image = nil
+        self.pokemonImageTask?.cancel()
+        self.pokemonDataTask?.cancel()
+        self.pokemonImage.image = nil
+        self.activityIndicator.startAnimating()
     }
-
+    
 }
 

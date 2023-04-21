@@ -31,7 +31,7 @@ class PokemonViewController: UIViewController {
                     self?.numberLabel.text = String(format: "#%04d", pokemonData.id)
                     self?.pokemonPicture.loadImage(from: pokemonData.sprites.front_default, completion: {
                         self?.activityIndicator.stopAnimating()
-                    })
+                    })?.resume()
                     
                     for typeEntry in pokemonData.types {
                         if typeEntry.slot == 1 {
@@ -50,9 +50,10 @@ class PokemonViewController: UIViewController {
 }
 
 extension UIImageView {
-    func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) {
-        guard let url = URL(string: stringURL) else { return }
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+    
+    func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) -> URLSessionDataTask? {
+        guard let url = URL(string: stringURL) else { return nil }
+        let loadImageTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard data != nil else { return }
             do {
                 let data = try Data(contentsOf: url)
@@ -65,6 +66,8 @@ extension UIImageView {
             catch let error {
                 print("\(error)")
             }
-        }.resume()
+        }
+        return loadImageTask
     }
 }
+    
