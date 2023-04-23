@@ -16,7 +16,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         request(
-            with: "https://pokeapi.co/api/v2/pokemon?limit=151",
+            with: "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0",
             model: PokemonList.self
         ) { [weak self] result in
             switch result {
