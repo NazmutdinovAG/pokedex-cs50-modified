@@ -11,6 +11,7 @@ class ViewController: UITableViewController {
     
     var pokemon: [Pokemon] = []
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         

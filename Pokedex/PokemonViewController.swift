@@ -53,7 +53,7 @@ extension UIImageView {
     
     func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) -> URLSessionDataTask? {
         guard let url = URL(string: stringURL) else { return nil }
-        return URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let data = data else { return }
             let image = UIImage(data: data)
             DispatchQueue.main.async {
@@ -61,6 +61,9 @@ extension UIImageView {
                 completion()
             }
         }
+        task.resume()
+        return task
     }
+    
 }
     

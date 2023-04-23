@@ -16,21 +16,17 @@ class PokemonCell: UITableViewCell {
     
     func prepare(pokemon: Pokemon) {
         nameLabel.text = pokemon.name
-        guard let url = URL(string: pokemon.url) else { return }
-        self.pokemonDataTask = URLSession.shared.dataTask(with: url) {[weak self] data, respone, error in
-            guard let data = data else { return }
-            do {
-                let pokemonData = try JSONDecoder().decode(PokemonData.self, from: data)
-                self?.pokemonImageTask = self?.pokemonImage.loadImage(from: pokemonData.sprites.front_default, completion: {[weak self] in
+        self.pokemonDataTask = request(with: pokemon.url, model: PokemonData.self) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.pokemonImageTask = self?.pokemonImage.loadImage(from: data.sprites.front_default, completion: {
+                    [weak self] in
                     self?.activityIndicator.stopAnimating()
                 })
-                self?.pokemonImageTask?.resume()
-            }
-            catch let error {
-                print("\(error)")
+            case .failure(let error):
+                print(" \(pokemon.name) \(error.localizedDescription)")
             }
         }
-        self.pokemonDataTask?.resume()
     }
     
     override func prepareForReuse() {
