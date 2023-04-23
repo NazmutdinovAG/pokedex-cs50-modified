@@ -7,6 +7,7 @@
 
 import Foundation
 
+@discardableResult
 func request<T: Decodable>(with url: String, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) -> URLSessionDataTask? {
     guard let url = URL(string: url) else { return nil }
     let task = URLSession.shared.dataTask(with: url) { data, response, error in
