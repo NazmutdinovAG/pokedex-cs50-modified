@@ -53,21 +53,14 @@ extension UIImageView {
     
     func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) -> URLSessionDataTask? {
         guard let url = URL(string: stringURL) else { return nil }
-        let loadImageTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard data != nil else { return }
-            do {
-                let data = try Data(contentsOf: url)
-                let image = UIImage(data: data)
-                DispatchQueue.main.async {
-                    self?.image = image
-                    completion()
-                }
-            }
-            catch let error {
-                print("\(error)")
+        return URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data else { return }
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                self?.image = image
+                completion()
             }
         }
-        return loadImageTask
     }
 }
     
