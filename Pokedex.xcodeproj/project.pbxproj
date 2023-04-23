@@ -16,6 +16,7 @@
 		8C4E163D29E8323C00616E12 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E163C29E8323C00616E12 /* Pokemon.swift */; };
 		8C4E163F29E83EC000616E12 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E163E29E83EC000616E12 /* PokemonViewController.swift */; };
 		8C6A41EB29EE9758007F10BB /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A41EA29EE9758007F10BB /* PokemonCell.swift */; };
+		8CB137D429F5567C00E9A3A5 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB137D329F5567C00E9A3A5 /* NetworkTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8C4E163C29E8323C00616E12 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		8C4E163E29E83EC000616E12 /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
 		8C6A41EA29EE9758007F10BB /* PokemonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCell.swift; sourceTree = "<group>"; };
+		8CB137D329F5567C00E9A3A5 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				8C4E163E29E83EC000616E12 /* PokemonViewController.swift */,
 				8C4E162C29E82B3600616E12 /* ViewController.swift */,
 				8C6A41EA29EE9758007F10BB /* PokemonCell.swift */,
+				8CB137D329F5567C00E9A3A5 /* NetworkTask.swift */,
 				8C4E162E29E82B3600616E12 /* Main.storyboard */,
 				8C4E163129E82B3700616E12 /* Assets.xcassets */,
 				8C4E163329E82B3700616E12 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 			files = (
 				8C4E162D29E82B3600616E12 /* ViewController.swift in Sources */,
 				8C4E163F29E83EC000616E12 /* PokemonViewController.swift in Sources */,
+				8CB137D429F5567C00E9A3A5 /* NetworkTask.swift in Sources */,
 				8C4E163D29E8323C00616E12 /* Pokemon.swift in Sources */,
 				8C4E162929E82B3600616E12 /* AppDelegate.swift in Sources */,
 				8C4E162B29E82B3600616E12 /* SceneDelegate.swift in Sources */,

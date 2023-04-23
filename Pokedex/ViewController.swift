@@ -11,24 +11,23 @@ class ViewController: UITableViewController {
     
     var pokemon: [Pokemon] = []
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=151") else { return }
-        URLSession.shared.dataTask(with: url) { data, respone, error in
-            guard let data = data else { return }
-            do {
-                let pokemonList = try JSONDecoder().decode(PokemonList.self, from: data)
-                self.pokemon = pokemonList.results
+        request(
+            with: "https://pokeapi.co/api/v2/pokemon?limit=151",
+            model: PokemonList.self
+        ) { [weak self] result in
+            switch result {
+            case .success(let list):
+                self?.pokemon = list.results
+                self?.tableView.reloadData()
                 
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-            catch let error {
-                print("\(error)")
-            }
-        }.resume()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
