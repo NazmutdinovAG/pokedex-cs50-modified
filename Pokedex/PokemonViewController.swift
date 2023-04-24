@@ -14,6 +14,8 @@ class PokemonViewController: UIViewController {
     @IBOutlet weak var type2Label: UILabel!
     @IBOutlet weak var pokemonPicture: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    weak var pokemonDataTask: URLSessionDataTask?
+    weak var pokemonImageTask: URLSessionTask?
     
     var pokemon: Pokemon!
     
@@ -21,36 +23,39 @@ class PokemonViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         
-        guard let url = URL(string: pokemon.url) else { return }
-        URLSession.shared.dataTask(with: url) { [weak self] data, respone, error in
-            guard let data = data else { return }
-            do {
-                let pokemonData = try JSONDecoder().decode(PokemonData.self, from: data)
-                DispatchQueue.main.async {
-                    self?.nameLabel.text = self?.pokemon.name.capitalized
-                    self?.numberLabel.text = String(format: "#%04d", pokemonData.id)
-                    self?.pokemonPicture.loadImage(from: pokemonData.sprites.front_default, completion: {
-                        self?.activityIndicator.stopAnimating()
-                    })?.resume()
-                    
-                    for typeEntry in pokemonData.types {
-                        if typeEntry.slot == 1 {
-                            self?.type1Label.text = typeEntry.type.name
-                        } else if typeEntry.slot == 2 {
-                            self?.type2Label.text = typeEntry.type.name
-                        }
+        self.pokemonDataTask = request(
+            with: pokemon.url,
+            model: PokemonData.self
+        ) { [weak self] result in
+            switch result {
+            case .success(let list):
+                self?.nameLabel.text = self?.pokemon.name.capitalized
+                self?.numberLabel.text = String(format: "#%04d", list.id)
+                self?.pokemonImageTask = self?.pokemonPicture.loadImage(from: list.sprites.front_default, completion: { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                })
+                for typeEntry in list.types {
+                    if typeEntry.slot == 1 {
+                        self?.type1Label.text = typeEntry.type.name
+                    } else if typeEntry.slot == 2 {
+                        self?.type2Label.text = typeEntry.type.name
                     }
                 }
+            case .failure(let error):
+                print(" \(self?.pokemon.name ?? "") \(error.localizedDescription)")
             }
-            catch let error {
-                print("\(error)")
-            }
-        }.resume()
+        }
     }
+    
+    deinit{
+        self.pokemonDataTask?.cancel()
+        self.pokemonImageTask?.cancel()
+    }
+    
 }
 
 extension UIImageView {
-    
+    @discardableResult
     func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) -> URLSessionDataTask? {
         guard let url = URL(string: stringURL) else { return nil }
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in

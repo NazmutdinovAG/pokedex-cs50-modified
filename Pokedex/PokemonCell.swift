@@ -19,8 +19,7 @@ class PokemonCell: UITableViewCell {
         self.pokemonDataTask = request(with: pokemon.url, model: PokemonData.self) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.pokemonImageTask = self?.pokemonImage.loadImage(from: data.sprites.front_default, completion: {
-                    [weak self] in
+                self?.pokemonImageTask = self?.pokemonImage.loadImage(from: data.sprites.front_default, completion: { [weak self] in
                     self?.activityIndicator.stopAnimating()
                 })
             case .failure(let error):
