@@ -51,10 +51,6 @@ class ViewController: UITableViewController {
         self.show(pokemonVC, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        tableView.indexPathForSelectedRow
-    }
 
 }
 
