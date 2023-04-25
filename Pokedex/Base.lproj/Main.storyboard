@@ -58,7 +58,6 @@
                                     <outlet property="activityIndicator" destination="9uu-Vr-pxz" id="vzq-XQ-3A5"/>
                                     <outlet property="nameLabel" destination="sV0-A7-Mbo" id="cvR-qi-KVf"/>
                                     <outlet property="pokemonImage" destination="PR9-p6-G74" id="fPl-FJ-s4Q"/>
-                                    <segue destination="u19-GG-pXk" kind="show" identifier="pokemonSegue" id="fRf-5A-BrH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,6 +67,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Pokédex" id="pMl-NN-Laa"/>
+                    <connections>
+                        <segue destination="u19-GG-pXk" kind="show" identifier="someIdentifier" id="s45-8q-nS1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Czx-vn-N6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -76,7 +78,7 @@
         <!--Pokemon View Controller-->
         <scene sceneID="3xv-O3-Aj9">
             <objects>
-                <viewController id="u19-GG-pXk" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pokemonSegue" id="u19-GG-pXk" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v7X-UB-MnX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

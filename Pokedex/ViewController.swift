@@ -11,7 +11,7 @@ class ViewController: UITableViewController {
     
     var pokemon: [Pokemon] = []
     
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +28,7 @@ class ViewController: UITableViewController {
                 print(error.localizedDescription)
             }
         }
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,17 +40,21 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonCell     
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonCell
         cell.prepare(pokemon: pokemon[indexPath.row])
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pokemonSegue" {
-            if let destination = segue.destination as? PokemonViewController {
-                destination.pokemon = pokemon[tableView.indexPathForSelectedRow!.row]
-            }
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pokemonVC = storyboard?.instantiateViewController(withIdentifier: "pokemonSegue") as! PokemonViewController
+        pokemonVC.pokemon = pokemon[tableView.indexPathForSelectedRow!.row]
+        self.show(pokemonVC, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        tableView.indexPathForSelectedRow
+    }
+
 }
 

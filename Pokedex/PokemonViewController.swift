@@ -19,6 +19,11 @@ class PokemonViewController: UIViewController {
     
     var pokemon: Pokemon!
     
+//    convenience init(pokemon: Pokemon) {
+//        self.init()
+//        self.pokemon = pokemon
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
@@ -47,6 +52,10 @@ class PokemonViewController: UIViewController {
         }
     }
     
+    func preparePokemon(_ pokemon: Pokemon) {
+        self.pokemon = pokemon
+    }
+    
     deinit{
         self.pokemonDataTask?.cancel()
         self.pokemonImageTask?.cancel()
@@ -54,21 +63,5 @@ class PokemonViewController: UIViewController {
     
 }
 
-extension UIImageView {
-    @discardableResult
-    func loadImage(from stringURL: String, completion: @escaping () -> Void = {}) -> URLSessionDataTask? {
-        guard let url = URL(string: stringURL) else { return nil }
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self?.image = image
-                completion()
-            }
-        }
-        task.resume()
-        return task
-    }
-    
-}
+
     
