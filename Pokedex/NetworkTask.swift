@@ -30,7 +30,7 @@ func request<T: Decodable>(with url: String, model: T.Type, completion: @escapin
             let result = try JSONDecoder().decode(model, from: data)
             completion(.success(result))
         }
-        catch let error {
+        catch {
             completion(.failure(error))
         }
     }

@@ -19,11 +19,6 @@ class PokemonViewController: UIViewController {
     
     var pokemon: Pokemon!
     
-//    convenience init(pokemon: Pokemon) {
-//        self.init()
-//        self.pokemon = pokemon
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
