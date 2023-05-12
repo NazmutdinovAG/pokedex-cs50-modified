@@ -16,15 +16,12 @@ class PokemonCell: UITableViewCell {
     
     func prepare(pokemon: Pokemon) {
         
-        
-        
         //MARK: pokemonImage's parametrs creating
         pokemonImage.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(pokemonImage)
         pokemonImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
         pokemonImage.widthAnchor.constraint(equalTo: pokemonImage.heightAnchor).isActive = true
         pokemonImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        
         
         //MARK: activityIndicator's parametrs creating
         activityIndicator.style = .medium
@@ -40,8 +37,6 @@ class PokemonCell: UITableViewCell {
         nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: pokemonImage.trailingAnchor, constant: 5).isActive = true
-        
-        
         self.pokemonDataTask = request(with: pokemon.url, model: PokemonData.self) { [weak self] result in
             switch result {
             case .success(let data):
