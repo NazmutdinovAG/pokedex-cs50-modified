@@ -36,6 +36,8 @@ class PokemonViewController: UIViewController {
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: pokemonPicture.bottomAnchor, constant: 10).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 300).isActive = true
+        nameLabel.adjustsFontSizeToFitWidth = true
         
         //MARK: numberLabel's parametrs creating
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -81,6 +83,9 @@ class PokemonViewController: UIViewController {
                     }
                 }
             case .failure(let error):
+                self?.nameLabel.text = "Oops, we can't find data on this Pokemon"
+                self?.pokemonPicture.image = UIImage(named: "pokeball")
+                self?.activityIndicator.stopAnimating()
                 print(" \(self?.pokemon.name ?? "") \(error.localizedDescription)")
             }
         }

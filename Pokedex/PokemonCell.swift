@@ -16,21 +16,18 @@ class PokemonCell: UITableViewCell {
     
     func prepare(pokemon: Pokemon) {
         
-        //MARK: pokemonImage's parametrs creating
         pokemonImage.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(pokemonImage)
         pokemonImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
         pokemonImage.widthAnchor.constraint(equalTo: pokemonImage.heightAnchor).isActive = true
         pokemonImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         
-        //MARK: activityIndicator's parametrs creating
         activityIndicator.style = .medium
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicator)
         activityIndicator.centerXAnchor.constraint(equalTo: pokemonImage.centerXAnchor).isActive = true
         activityIndicator.centerYAnchor.constraint(equalTo: pokemonImage.centerYAnchor).isActive = true
     
-        //MARK: nameLabel's parametrs creating
         nameLabel.text = pokemon.name
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(nameLabel)
@@ -49,7 +46,6 @@ class PokemonCell: UITableViewCell {
                 print(" \(pokemon.name) \(error.localizedDescription)")
             }
         }
-        
     }
     
     override func prepareForReuse() {

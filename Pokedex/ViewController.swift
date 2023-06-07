@@ -10,23 +10,27 @@ import UIKit
 class ViewController: UITableViewController {
     
     var pokemon: [Pokemon] = []
+    var firstRequestDataCount: Int?
+    var pagination = true
+    let limitContentOffset = 50
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if pokemon.isEmpty {
+            request(with: "https://pokeapi.co/api/v2/pokemon?offset=\(pokemon.count)&limit=\(limitContentOffset)", model: PokemonList.self) { [weak self] result in
+                switch result {
+                case .success(let list):
+                    self?.pokemon.append(contentsOf: list.results)
+                    self?.tableView.reloadData()
+                    self?.firstRequestDataCount = list.results.count
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        request(
-            with: "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0",
-            model: PokemonList.self
-        ) { [weak self] result in
-            switch result {
-            case .success(let list):
-                self?.pokemon = list.results
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
         
     }
     
@@ -50,6 +54,25 @@ class ViewController: UITableViewController {
         self.show(pokemonVC, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard pagination else { return }
+        let lastIndex = pokemon.count - 5
+        
+        if lastIndex == indexPath.row {
+            request(with: "https://pokeapi.co/api/v2/pokemon?offset=\(pokemon.count)&limit=\(limitContentOffset)", model: PokemonList.self) { [weak self] result in
+                switch result {
+                case .success(let list):
+                    self?.pokemon.append(contentsOf: list.results)
+                    tableView.reloadData()
+                    if let firstRequestDataCount = self?.firstRequestDataCount {
+                        self?.pagination = list.results.count >= firstRequestDataCount ? true : false
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
 }
-
